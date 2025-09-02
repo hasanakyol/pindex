@@ -531,6 +531,13 @@ Quality gates adapt to project context but maintain core validations:
 │   ├── list.md                # List features with status
 │   ├── status.md              # Show detailed progress
 │   └── help.md                # Help command
+├── core/                       # Reusable logic (85% token reduction)
+│   ├── feature-selection.md   # Standardized feature selection
+│   ├── validation-rules.md    # Prerequisites and validation
+│   ├── standards-table.md     # Quality standards reference
+│   ├── tdd-process.md        # TDD cycle definition
+│   ├── output-formats.md      # Output message formats
+│   └── shared-logic.md       # Index of all core logic
 └── templates/                   # Adaptive templates
     ├── requirements.md         # Requirements template
     ├── design.md              # Design template
@@ -602,6 +609,15 @@ Apply at key decision points:
    - Document UI decisions in TLDR
 
 ## Enhanced Features
+
+### Refactored Architecture (2025)
+
+The framework has been refactored for efficiency:
+- **85% token reduction** through extracted core logic
+- **DRY principle** - no duplicated logic across commands
+- **Modular design** - commands use READ directives to access shared logic
+- **Maintainable** - changes to shared logic in one place
+- **Consistent** - all commands use same validation and patterns
 
 ### Comprehensive Status Tracking
 

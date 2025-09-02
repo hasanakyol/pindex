@@ -1,45 +1,28 @@
 ---
-description: List all available features (specs)
-allowed-tools: Read, Glob, TodoRead, TodoWrite
+description: List all features with documentation status.
+allowed-tools: Read, Glob
 ---
 
-# List All Features
-
-You are listing all the available features (specs) in the project.
-
-## Your Task
-
-List all feature directories located under `features/`.
+# List Features
 
 ## Process
 
-1.  **Find features**: Use the `Glob` tool to find all directories inside the `features/` directory.
-2.  **Check documentation**: For each feature, check which specification files exist:
-    - `requirements.md` - Requirements specification
-    - `design.md` - Technical design
-    - `tasks.md` - Implementation tasks
-    - `tldr.md` - Implementation summary
-3.  **Sort numerically**: Sort the list by the leading zero-padded number (NN) in the directory name (e.g., 01-, 02-, 03-).
-4.  **Display enhanced list**: Present the sorted feature directories with their documentation status.
+1. **Find features**: Glob features/* directories
+2. **Check status** per feature:
+   - requirements.md: Has DRAFT marker or content?
+   - design.md: Has content beyond template?
+   - tasks.md: Has actual tasks?
+   - tldr.md: Exists?
+3. **Sort**: By NN- prefix numerically
+4. **Display**:
+   ```
+   | # | Feature | Req | Des | Tasks | TLDR | Status |
+   |---|---------|-----|-----|-------|------|--------|
+   | 1 | 01-name | ✅  | ✅  | ✅    | ✅   | Complete |
+   | 2 | 02-next | ✅  | ✅  | 📝   | ❌   | Tasks |
+   
+   ✅ Content | 📝 Template | ❌ Missing
+   ```
 
-## Example Output
-
-```
-Available Features:
-
-| # | Feature                  | Req | Des | Tasks | TLDR | Status       |
-|---|--------------------------|-----|-----|-------|------|--------------|
-| 1 | 01-project-setup        | ✅  | ✅  | ✅    | ✅   | Complete     |
-| 2 | 02-basic-todo-crud      | ✅  | ✅  | ✅    | ❌   | Implementing |
-| 3 | 03-tags-system          | ✅  | ✅  | ❌    | ❌   | Designing    |
-| 4 | 04-user-authentication  | ✅  | ❌  | ❌    | ❌   | Requirements |
-| 5 | 05-notifications        | ❌  | ❌  | ❌    | ❌   | Planned      |
-
-Legend:
-- Req: Requirements | Des: Design | Tasks: Task breakdown | TLDR: Implementation summary
-- Status is inferred from which documents exist
-```
-
-## Context Management
-
-💡 **Performance Tip**: This is a lightweight read-only command that doesn't accumulate context. No need to use `/clear` after this command.
+## Output
+READ @.claude/core/output-formats.md (lightweight command note)

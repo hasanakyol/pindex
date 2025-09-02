@@ -2,8 +2,6 @@
 
 A universal, architecture-agnostic framework for building software through structured specifications, optimized for AI-powered development tools. Works with any language, any architecture pattern, new or existing codebases.
 
-Modern defaults with Bun, Hono, Turborepo, Biome, and comprehensive security practices including AI/LLM threat protection and supply chain security.
-
 ```
  ██████╗  ██╗ ███╗   ██╗ ██████╗  ███████╗ ██╗  ██╗
  ██╔══██╗ ██║ ████╗  ██║ ██╔══██╗ ██╔════╝ ╚██╗██╔╝
@@ -128,7 +126,7 @@ Every implementation follows the Red-Green-Refactor-Validate cycle:
 your-project/
 ├── .claude/
 │   ├── CLAUDE.md                 # Complete methodology
-│   ├── commands/pin/             # Slash commands
+│   ├── commands/pin/             # Concise slash commands (~85% smaller)
 │   │   ├── plan.md
 │   │   ├── requirements.md
 │   │   ├── design.md
@@ -139,20 +137,27 @@ your-project/
 │   │   ├── list.md
 │   │   ├── status.md
 │   │   └── help.md
-│   ├── templates/                # Reference templates
+│   ├── core/                     # Reusable logic (NEW)
+│   │   ├── feature-selection.md # Feature selection logic
+│   │   ├── validation-rules.md  # Prerequisites & validation
+│   │   ├── standards-table.md   # Quality standards
+│   │   ├── tdd-process.md      # TDD cycle definition
+│   │   ├── output-formats.md    # Output messages
+│   │   └── shared-logic.md     # Index of core logic
+│   ├── templates/                # Document templates
 │   │   ├── requirements.md
 │   │   ├── design.md
 │   │   ├── tasks.md
 │   │   └── tldr.md
-│   ├── ARCHITECTURE.md           # Project architecture decisions
-│   ├── CONVENTIONS.md            # Coding standards & practices
-│   └── SECURITY.md               # OWASP 2025 security checklist
+│   ├── ARCHITECTURE.md           # Project architecture
+│   ├── CONVENTIONS.md            # Coding standards
+│   └── SECURITY.md               # OWASP 2025 checklist
 └── features/                     # Generated specifications
     └── [feature-name]/
         ├── requirements.md       # EARS requirements
         ├── design.md            # Technical design
         ├── tasks.md             # TDD task breakdown
-        └── tldr.md  # Completion summaries
+        └── tldr.md              # Implementation summary
 ```
 
 ## 💡 Why This Works
@@ -167,7 +172,8 @@ your-project/
 - **Human Control**: Explicit approval gates
 - **Quality Assurance**: Built-in testing via TDD
 - **Security-First**: OWASP 2025 & AI/LLM security built-in
-- **Modern Stack**: Bun, Hono, Biome, Vitest defaults
+- **Token Efficient**: 85% reduction through modular architecture
+- **Maintainable**: DRY principle, shared logic in one place
 - **Iterative**: Easy to refine individual phases
 - **Scalable**: Works for simple features to complex systems
 

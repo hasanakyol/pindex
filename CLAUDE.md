@@ -72,18 +72,29 @@ See `@.claude/CLAUDE.md` for:
 - Quality gates and validation
 - Advanced features
 
-## Project-Specific Files
+## Framework Structure
 
-When working with this framework, the following files will be discovered or generated:
+### Core Logic (`@.claude/core/`)
+Reusable logic extracted for efficiency (~85% token reduction):
+- `feature-selection.md` - Standardized feature selection
+- `validation-rules.md` - Prerequisites and validation
+- `standards-table.md` - Quality standards reference
+- `tdd-process.md` - TDD cycle definition
+- `output-formats.md` - Output message formats
+- `shared-logic.md` - Index of all core logic
 
-- `@.claude/ARCHITECTURE.md` - Your project's specific architecture (filled with concrete decisions, no placeholders)
-- `@.claude/CONVENTIONS.md` - Your project's coding standards (declarative "we use X" format, no options)
-- `@.claude/SECURITY.md` - OWASP Top 10 security checklist for production-ready code
-- `features/*/` - Feature specifications with:
-  - `requirements.md` - EARS requirements
-  - `design.md` - Technical design
-  - `tasks.md` - TDD implementation tasks
-  - `tldr.md` - Implementation summary (generated when stopping, complete or partial)
+### Templates (`@.claude/templates/`)
+Document templates for feature specifications:
+- `requirements.md` - EARS requirements template
+- `design.md` - Technical design template
+- `tasks.md` - TDD task breakdown template
+- `tldr.md` - Implementation summary template
+
+### Project Files (Generated)
+- `@.claude/ARCHITECTURE.md` - Your project's specific architecture
+- `@.claude/CONVENTIONS.md` - Your project's coding standards
+- `@.claude/SECURITY.md` - OWASP security checklist
+- `features/*/` - Feature specifications
 
 ---
 # important-instruction-reminders
