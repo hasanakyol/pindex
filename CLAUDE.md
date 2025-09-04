@@ -1,104 +1,105 @@
-# CLAUDE.md - Quick Reference
+# CLAUDE.md
 
-This file provides quick reference for Claude Code when working with Pindex.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What is This?
+## What is Pindex?
 
-**Pindex** - A **universal, adaptable** framework for building software through structured specifications. Provides excellent support for web applications while adapting to any language, architecture pattern, or project type.
+Pindex is a universal, architecture-agnostic framework for building software through structured specifications. It's designed to work with Claude Code through slash commands (`/pin:*`) that guide development through a 6-phase workflow.
 
-## Context Management Best Practices
+## Framework Development Commands
 
-- **Between Phases**: Use `/clear` when moving between major phases (requirements → design → tasks)
-- **During Execute**: Start fresh session after completing 2-3 tasks to maintain performance
-- **Large Projects**: Reset context after planning phase before detailing requirements
-- **Visual Features**: Use screenshots for UI validation with `/pin:align`
+Since this is the Pindex framework repository itself (not a project using Pindex), there are no build/test commands. The framework consists of markdown templates and command definitions.
 
-## Quick Start Commands
+To test changes to the framework:
+1. Copy the `.claude` directory to a test project
+2. Test the slash commands in Claude Code within that project
 
-```bash
-# New project (two modes)
-/pin:plan "Your project description"          # Interactive discussion → empty templates
-/pin:plan "Your project description" --all    # Interactive discussion → draft EARS requirements
+## Framework Architecture
 
-# Add single feature
-/pin:feature "Feature description"
-
-# Develop feature (in order - all take optional feature-name)
-/pin:requirements [feature-name]
-/pin:design [feature-name]
-/pin:tasks [feature-name]
-/pin:align [feature-name]      # Ensure alignment (recommended)
-/pin:execute [feature-name]
-
-# Utilities
-/pin:list                       # List features with documentation status
-/pin:status                     # Show comprehensive progress
-/pin:align [feature-name]       # Feature alignment: specs alignment (req→design→tasks)
-/pin:help                       # Detailed help
+### Core Structure
+```
+.claude/
+├── CLAUDE.md                    # Complete framework reference (21KB)
+├── commands/pin/               # Slash command definitions (~85% smaller than v1)
+│   └── *.md                    # Each command reads shared logic via READ directives
+├── core/                       # Reusable logic modules (DRY principle)
+│   ├── feature-selection.md   # Standardized feature selection logic
+│   ├── validation-rules.md    # Prerequisites and validation rules
+│   ├── standards-table.md     # Quality standards reference
+│   ├── tdd-process.md        # TDD cycle definition
+│   ├── output-formats.md      # Consistent output message formats
+│   └── shared-logic.md       # Index of all shared logic modules
+└── templates/                  # Document templates for feature specs
+    ├── requirements.md         # EARS requirements template
+    ├── design.md              # Technical design template
+    ├── tasks.md               # TDD task breakdown template
+    └── tldr.md                # Implementation summary template
 ```
 
-## Workflow at a Glance
+### Key Design Principles
 
-1. **Plan** → Interactive discussion to break down into features (optionally generating draft requirements from discussion)
-2. **Requirements** → Define/refine WHAT (EARS format)
-3. **Design** → Define HOW (tech specs)
-4. **Tasks** → Break into TDD steps
-5. **Align** → Ensure alignment (recommended before execute)
-6. **Execute** → Implement with tests
+1. **Token Efficiency**: v2 refactoring achieved ~85% token reduction by extracting shared logic
+2. **DRY Principle**: No duplicated logic across commands - all shared logic in `core/`
+3. **READ Directives**: Commands use `READ:` to access shared logic modules
+4. **Modular Design**: Each command is self-contained but references shared components
+5. **Template Adaptation**: Templates adapt to project type (Web, CLI, Library, etc.)
 
-## Key Principles
+### Command Flow
 
-- **Universal adaptation**: Works with any project type through adaptive templates
-- **Web-optimized**: Excellent defaults and examples for modern web development
-- **Explicit approval gates**: User control at each phase
-- **Test-driven**: Red-Green-Refactor-Validate methodology
-- **Production-ready**: Focus on deployable code, not prototypes
-- **Context-aware**: Adapts to existing codebases and conventions
+Each `/pin:*` command follows this pattern:
+1. Reads prerequisites via `READ: @.claude/core/validation-rules.md#prerequisites`
+2. Performs its specific function
+3. Uses shared output formats from `core/output-formats.md`
+4. References quality standards from `core/standards-table.md`
 
-## Feature Selection
+### Important Files
 
-- All commands accept optional feature-name argument
-- Without argument: Lists features and asks for selection
-- With argument: Uses specified feature
-- No auto-selection even with single feature
+- **CLAUDE.md (root)**: Quick reference for users - keep concise
+- **.claude/CLAUDE.md**: Complete methodology documentation - comprehensive
+- **README.md**: Public-facing documentation with installation instructions
 
-## Full Documentation
+## Making Changes to Pindex
 
-See `@.claude/CLAUDE.md` for:
+### When Modifying Commands
+- Update the command file in `.claude/commands/pin/`
+- If adding new shared logic, place it in `.claude/core/` and update `shared-logic.md`
+- Ensure READ directives point to correct sections
 
-- Complete methodology details
-- EARS requirements syntax
-- TDD implementation guide
-- Quality gates and validation
-- Advanced features
+### When Modifying Templates
+- Templates in `.claude/templates/` use placeholders that get replaced during generation
+- Maintain compatibility with the "initialize-or-augment" policy (never overwrite user content)
 
-## Framework Structure
+### When Updating Documentation
+- Keep root `CLAUDE.md` as quick reference only
+- Put detailed documentation in `.claude/CLAUDE.md`
+- Update README.md for public-facing changes
 
-### Core Logic (`@.claude/core/`)
-Reusable logic extracted for efficiency (~85% token reduction):
-- `feature-selection.md` - Standardized feature selection
-- `validation-rules.md` - Prerequisites and validation
-- `standards-table.md` - Quality standards reference
-- `tdd-process.md` - TDD cycle definition
-- `output-formats.md` - Output message formats
-- `shared-logic.md` - Index of all core logic
+## Context Management
 
-### Templates (`@.claude/templates/`)
-Document templates for feature specifications:
-- `requirements.md` - EARS requirements template
-- `design.md` - Technical design template
-- `tasks.md` - TDD task breakdown template
-- `tldr.md` - Implementation summary template
+When working on Pindex framework improvements:
+- Focus on one command or component at a time
+- Test changes in a separate project directory
+- Remember that users will use these commands through Claude Code
 
-### Project Files (Generated)
-- `@.claude/ARCHITECTURE.md` - Your project's specific architecture
-- `@.claude/CONVENTIONS.md` - Your project's coding standards
-- `@.claude/SECURITY.md` - OWASP security checklist
-- `features/*/` - Feature specifications
+## Testing Framework Changes
 
----
-# important-instruction-reminders
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+To test your changes:
+```bash
+# Create test project
+mkdir ~/test-pindex
+cd ~/test-pindex
+
+# Copy framework
+cp -r /path/to/pindex/.claude .
+cp /path/to/pindex/CLAUDE.md .
+
+# Test in Claude Code
+# Try the /pin:* commands
+```
+
+## Important Reminders
+
+- Do not create files unless necessary for the framework functionality
+- Prefer editing existing files over creating new ones
+- The framework should work with any project type, not just web applications
+- Maintain backwards compatibility when making changes
